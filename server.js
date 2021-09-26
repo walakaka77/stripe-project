@@ -14,6 +14,4 @@ app.set('view engine', 'ejs')
 //app.use(express.json())
 app.use(express.static('public'))
 
-Test file here
-
 app.listen(3000)
