@@ -9,9 +9,24 @@ console.log(stripeSecretKey, stripePublicKey)
 
 const express = require('express')
 const app = express()
+const fs = require('fs')
 
 app.set('view engine', 'ejs')
 //app.use(express.json())
 app.use(express.static('public'))
 
-app.listen(3000)
+app.get('/store.ejs', function(req, res) {
+  fs.readFile('items.json', function(error, data) {
+    if (error) {
+      console.log(error);
+      res.status(500).end();
+    } else {
+      res.render('store.ejs', {
+        stripePublicKey: stripePublicKey,
+        items: JSON.parse(data)
+      }) 
+    }
+  })
+})
+
+app.listen(3000, ()=>console.log('The server is running'))
