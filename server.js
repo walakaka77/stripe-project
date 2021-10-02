@@ -18,7 +18,8 @@ app.use(express.static('public'))
 app.get('/store', function(req, res) {
   fs.readFile('items.json', function(error, data) {
     if (error) {
-      res.status(500).end()
+      res.status(500).end();
+      console.log('cannot get');
     } else {
       res.render('store.ejs', {
         stripePublicKey: stripePublicKey,
@@ -28,4 +29,4 @@ app.get('/store', function(req, res) {
   })
 })
 
-app.listen(3000)
+app.listen(3000, ()=>console.log('The server is running'))
